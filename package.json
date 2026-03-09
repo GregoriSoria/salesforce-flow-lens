@@ -4,7 +4,7 @@
   "description": "A powerful VS Code extension to visually analyze, compare, and edit Salesforce Flows.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.100.0"
   },
   "categories": [
     "Other"
@@ -14,10 +14,27 @@
   "contributes": {
     "commands": [
       {
-        "command": "salesforce-flow-lens.helloWorld",
-        "title": "Hello World"
+        "command": "salesforce-flow-lens.openViewer",
+        "title": "Open in Flow Lens",
+        "icon": "$(git-compare)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "salesforce-flow-lens.openViewer",
+          "when": "resourceFilename =~ /\\.flow-meta\\.xml$/",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "salesforce-flow-lens.openViewer",
+          "when": "resourceFilename =~ /\\.flow-meta\\.xml$/",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -31,16 +48,20 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.109.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "typescript-eslint": "^8.56.1",
-    "eslint": "^9.39.3",
-    "typescript": "^5.9.3",
-    "ts-loader": "^9.5.4",
-    "webpack": "^5.105.3",
-    "webpack-cli": "^6.0.1",
+    "@types/vscode": "^1.100.0",
     "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "webpack": "^5.105.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.4.2",
+    "reactive-vscode": "1.0.0-beta.2"
   }
 }
